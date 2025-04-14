@@ -62,7 +62,7 @@ experimental:
   plugins:
     maintenance-warden:
       moduleName: "github.com/TechAlchemistry/traefik-maintenance-warden"
-      version: "v0.1.0"
+      version: "v1.0.0"
 ```
 
 ### Dynamic Configuration

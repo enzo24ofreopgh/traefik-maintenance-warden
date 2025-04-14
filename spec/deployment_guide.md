@@ -14,7 +14,7 @@ experimental:
   plugins:
     maintenance-warden:
       moduleName: "github.com/TechAlchemistry/traefik-maintenance-warden"
-      version: "v0.1.0"
+      version: "v1.0.0"
 ```
 
 2. Restart Traefik to load the plugin.
@@ -33,7 +33,7 @@ experimental:
   plugins:
     maintenance-warden:
       moduleName: "github.com/TechAlchemistry/traefik-maintenance-warden"
-      version: "v0.1.0"
+      version: "v1.0.0"
 ```
 
 2. Install or upgrade your Traefik chart:
