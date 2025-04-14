@@ -282,4 +282,8 @@ For more detailed information, see the documentation in the [spec](./spec) direc
 1. [**Technical Overview**](./spec/technical_overview.md) - Architecture, features, and technical implementation details
 2. [**Audience and Use Cases**](./spec/audience_and_use_cases.md) - Target users and the problems the plugin solves
 3. [**Deployment Guide**](./spec/deployment_guide.md) - How to deploy and configure the plugin in various environments
-4. [**Benefits and Comparisons**](./spec/benefits_and_comparisons.md) - Key benefits and comparison with alternative approaches 
+4. [**Benefits and Comparisons**](./spec/benefits_and_comparisons.md) - Key benefits and comparison with alternative approaches
+
+## License
+
+Maintenance Warden is licensed under the [MIT License](./LICENSE). 
