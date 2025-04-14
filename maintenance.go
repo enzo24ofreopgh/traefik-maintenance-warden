@@ -190,6 +190,11 @@ func (m *MaintenanceBypass) loadMaintenanceFile() error {
 		return fmt.Errorf("error reading maintenance file: %w", err)
 	}
 	
+	// Check if the file is empty
+	if len(content) == 0 {
+		return fmt.Errorf("maintenance file is empty: %s", m.maintenanceFilePath)
+	}
+	
 	m.maintenanceFileContent = content
 	m.maintenanceFileLastMod = fileInfo.ModTime()
 	m.log(LogLevelInfo, "Loaded maintenance file: %s (%d bytes)", m.maintenanceFilePath, len(content))
