@@ -2,6 +2,10 @@
 
 # Maintenance Warden: Flexible Maintenance Mode Plugin for Traefik
 
+[![Test and Coverage](https://github.com/TechAlchemistry/traefik-maintenance-warden/actions/workflows/test.yml/badge.svg)](https://github.com/TechAlchemistry/traefik-maintenance-warden/actions/workflows/test.yml)
+[![codecov](https://codecov.io/gh/TechAlchemistry/traefik-maintenance-warden/branch/main/graph/badge.svg)](https://codecov.io/gh/TechAlchemistry/traefik-maintenance-warden)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+
 **Professional service maintenance with intelligent bypass controls**
 
 Maintenance Warden is a lightweight, high-performance middleware plugin for Traefik that provides a flexible maintenance mode solution for your services. It allows you to easily activate maintenance mode across your infrastructure while maintaining accessibility for authorized users through a configurable bypass header.
