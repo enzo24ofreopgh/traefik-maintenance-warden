@@ -1,3 +1,3 @@
 module github.com/TechAlchemistry/traefik-maintenance-warden
 
-go 1.22.1
+go 1.22
