@@ -3,7 +3,7 @@
 # Maintenance Warden: Flexible Maintenance Mode Plugin for Traefik
 
 [![Test and Coverage](https://github.com/TechAlchemistry/traefik-maintenance-warden/actions/workflows/test.yml/badge.svg)](https://github.com/TechAlchemistry/traefik-maintenance-warden/actions/workflows/test.yml)
-[![codecov](https://codecov.io/gh/TechAlchemistry/traefik-maintenance-warden/branch/main/graph/badge.svg)](https://codecov.io/gh/TechAlchemistry/traefik-maintenance-warden)
+[![Coverage](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/TechAlchemistry/bdb9ae1d94d9c4031d310fc2a231d6b8/raw/coverage.json)](https://github.com/TechAlchemistry/traefik-maintenance-warden/actions/workflows/test.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
 **Professional service maintenance with intelligent bypass controls**

@@ -20,8 +20,21 @@ jobs:
     - name: Test
       run: go test -v ./... -coverprofile=coverage.txt -covermode=atomic
 
-    - name: Upload coverage to Codecov
-      uses: codecov/codecov-action@v3
+    - name: Generate coverage percentage
+      id: coverage
+      run: |
+        COVERAGE=$(go tool cover -func=coverage.txt | grep total | grep -Eo '[0-9]+\.[0-9]+')
+        echo "percentage=$COVERAGE" >> $GITHUB_OUTPUT
+        echo "Total coverage: $COVERAGE%"
+
+    - name: Generate coverage badge
+      uses: schneegans/dynamic-badges-action@v1.6.0
+      if: github.ref == 'refs/heads/main'
       with:
-        file: ./coverage.txt
-        fail_ci_if_error: false 
+        auth: ${{ secrets.GIST_SECRET }}
+        gistID: ${{ secrets.GIST_ID }}
+        filename: coverage.json
+        label: coverage
+        message: ${{ steps.coverage.outputs.percentage }}%
+        color: ${{ steps.coverage.outputs.percentage >= 80 && 'green' || steps.coverage.outputs.percentage >= 60 && 'yellow' || 'red' }}
+        style: flat 
