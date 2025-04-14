@@ -1,0 +1,31 @@
+displayName: Maintenance Warden
+type: middleware
+iconPath: .assets/icon.png
+
+import: github.com/TechAlchemistry/traefik-maintenance-warden
+
+summary: A middleware that serves a maintenance page unless a bypass header is present or path matches a bypass pattern.
+
+testData:
+  # Choose one of these options - file-based is preferred
+  maintenanceFilePath: "/etc/traefik/maintenance.html"
+  # maintenanceService: "http://maintenance-page-service.test-maintenance"
+  
+  # Content settings (for file-based)
+  contentType: "text/html; charset=utf-8"
+  
+  # Basic settings
+  bypassHeader: "X-Maintenance-Bypass"
+  bypassHeaderValue: "true"
+  enabled: true
+  statusCode: 503
+  
+  # Path bypass options
+  bypassPaths:
+    - "/health"
+    - "/api/status"
+  bypassFavicon: true
+  
+  # Performance and debugging options
+  logLevel: 1
+  maintenanceTimeout: 10  # For service-based only 
