@@ -27,14 +27,17 @@ jobs:
         echo "percentage=$COVERAGE" >> $GITHUB_OUTPUT
         echo "Total coverage: $COVERAGE%"
 
-    - name: Generate coverage badge
-      uses: schneegans/dynamic-badges-action@v1.6.0
+    - name: Create coverage.json file
+      if: github.ref == 'refs/heads/main'
+      run: |
+        echo "{\"schemaVersion\":1,\"label\":\"coverage\",\"message\":\"${{ steps.coverage.outputs.percentage }}%\",\"color\":\"$([ $(echo "${{ steps.coverage.outputs.percentage }} >= 80" | bc -l) -eq 1 ] && echo 'green' || [ $(echo "${{ steps.coverage.outputs.percentage }} >= 60" | bc -l) -eq 1 ] && echo 'yellow' || echo 'red')\"}" > coverage.json
+        cat coverage.json
+
+    - name: Update Gist with coverage data
+      uses: exuanbo/actions-deploy-gist@v1
       if: github.ref == 'refs/heads/main'
       with:
-        auth: ${{ secrets.GIST_SECRET }}
-        gistID: ${{ secrets.GIST_ID }}
-        filename: coverage.json
-        label: coverage
-        message: ${{ steps.coverage.outputs.percentage }}%
-        color: ${{ steps.coverage.outputs.percentage >= 80 && 'green' || steps.coverage.outputs.percentage >= 60 && 'yellow' || 'red' }}
-        style: flat 
+        token: ${{ secrets.GIST_SECRET }}
+        gist_id: ${{ secrets.GIST_ID }}
+        file_path: coverage.json
+        file_type: json 
