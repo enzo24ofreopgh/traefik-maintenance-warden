@@ -1,3 +1,5 @@
+<img src=".assets/icon.png" alt="Maintenance Warden Logo" width="100" align="right" />
+
 # Maintenance Warden: Flexible Maintenance Mode Plugin for Traefik
 
 **Professional service maintenance with intelligent bypass controls**
