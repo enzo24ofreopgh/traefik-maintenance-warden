@@ -1,6 +1,6 @@
-// Package maintenance_warden provides a Traefik plugin to redirect traffic to a maintenance page
+// Package traefik_maintenance_warden provides a Traefik plugin to redirect traffic to a maintenance page
 // while allowing requests with a specific header to bypass the redirection
-package maintenance_warden
+package traefik_maintenance_warden
 
 import (
 	"context"
