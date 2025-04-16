@@ -10,7 +10,7 @@ testData:
   # Choose one of these options - file-based is preferred
   # maintenanceFilePath: "/etc/traefik/maintenance.html"
   # maintenanceService: "http://maintenance-page-service.test-maintenance"
-   maintenanceContent: "<html><body><h1>Maintenance in Progress</h1><p>We'll be back shortly.</p></body></html>"
+  maintenanceContent: "<html><body><h1>Maintenance in Progress</h1><p>We'll be back shortly.</p></body></html>"
   
   # Content settings (for file or content based)
   contentType: "text/html; charset=utf-8"
