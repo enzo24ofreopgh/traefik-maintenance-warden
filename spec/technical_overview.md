@@ -46,12 +46,13 @@ flowchart TB
     E -->|Bypass Header Match\nor Path Match| D
     E -->|No Bypass Match| F{Content Type}
     F -->|File-Based| G[Serve Maintenance File]
+    F -->|Content-Based| I[Serve Inline Content]
     F -->|Service-Based| H[Proxy to Maintenance Service]
 ```
 
 ## Technical Features
 
-### 1. Dual Content Serving Modes
+### 1. Content Serving Modes
 
 #### File-Based Maintenance
 - **Implementation**: Direct file serving from disk
@@ -59,6 +60,13 @@ flowchart TB
 - **Caching**: File content is cached in memory for efficiency
 - **Change Detection**: Checks file modification times to auto-reload
 - **Resource Usage**: Minimal memory footprint (~size of HTML file)
+
+#### Content-Based Maintenance
+- **Implementation**: Direct string content serving from configuration
+- **Performance**: Highest performance with zero latency
+- **Simplicity**: No file access or network required
+- **Deployment**: Content directly embedded in configuration
+- **Resource Usage**: Minimal memory footprint (only size of content string)
 
 #### Service-Based Maintenance
 - **Implementation**: HTTP reverse proxy to maintenance service

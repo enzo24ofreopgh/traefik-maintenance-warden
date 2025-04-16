@@ -31,6 +31,7 @@ This document outlines the key benefits of the Maintenance Warden plugin for Tra
 - **High Reliability**: Simple, well-tested code path for critical infrastructure
 - **Flexible Deployment**: Works in containerized, VM-based, or hybrid environments
 - **Scalable Architecture**: Scales with your Traefik instances without additional configuration
+- **Multiple Content Options**: Choose between file-based, inline content, or service-based delivery methods
 
 ### 5. Security Benefits
 

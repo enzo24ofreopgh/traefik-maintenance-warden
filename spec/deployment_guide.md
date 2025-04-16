@@ -53,10 +53,27 @@ metadata:
 spec:
   plugin:
     maintenance-warden:
+      # Choose one of these options:
+      
+      # For static file - mount a ConfigMap as a volume
       maintenanceFilePath: "/config/maintenance.html"
+      
+      # Or for service-based
+      # maintenanceService: "http://maintenance-page-service.test-maintenance"
+      
+      # Or for content-based (simplest option)
+      # maintenanceContent: "<html><body><h1>Maintenance in Progress</h1><p>Please check back later.</p></body></html>"
+      
+      # Other settings
       bypassHeader: "X-Maintenance-Bypass"
       bypassHeaderValue: "true"
-      enabled: false  # Start with maintenance mode disabled
+      enabled: true
+      statusCode: 503
+      bypassPaths:
+        - "/health"
+        - "/api/status"
+      logLevel: 1
+      contentType: "text/html; charset=utf-8"
 ```
 
 4. Reference the middleware in your IngressRoute:
@@ -92,6 +109,23 @@ http:
       plugin:
         maintenance-warden:
           maintenanceFilePath: "/path/to/maintenance.html"
+          contentType: "text/html; charset=utf-8"
+          bypassHeader: "X-Maintenance-Bypass"
+          bypassHeaderValue: "true"
+          enabled: true
+          statusCode: 503
+```
+
+### Content-Based Maintenance
+
+```yaml
+# Dynamic configuration
+http:
+  middlewares:
+    maintenance:
+      plugin:
+        maintenance-warden:
+          maintenanceContent: "<html><body><h1>We're down for maintenance</h1><p>We'll be back shortly.</p></body></html>"
           contentType: "text/html; charset=utf-8"
           bypassHeader: "X-Maintenance-Bypass"
           bypassHeaderValue: "true"
@@ -370,4 +404,4 @@ Test that maintenance mode is working correctly:
 
 ### Disabling Maintenance Mode
 
-Follow the same procedures as enabling, but set `enabled: false`. 
+Follow the same procedures as enabling, but set `enabled: false`.

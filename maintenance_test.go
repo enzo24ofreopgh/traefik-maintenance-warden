@@ -53,123 +53,123 @@ func TestMaintenanceBypass(t *testing.T) {
 		expectedRedirectURL string
 	}{
 		{
-			name:               "No bypass header should return 503 when enabled",
-			enabled:            true,
-			bypassHeader:       "",
-			bypassHeaderValue:  "",
-			statusCode:         503,
-			path:               "/",
-			bypassPaths:        []string{},
-			bypassFavicon:      true,
-			expectedStatusCode: http.StatusServiceUnavailable,
+			name:                "No bypass header should return 503 when enabled",
+			enabled:             true,
+			bypassHeader:        "",
+			bypassHeaderValue:   "",
+			statusCode:          503,
+			path:                "/",
+			bypassPaths:         []string{},
+			bypassFavicon:       true,
+			expectedStatusCode:  http.StatusServiceUnavailable,
 			expectedRedirectURL: "",
 		},
 		{
-			name:               "Wrong bypass header value should return 503 when enabled",
-			enabled:            true,
-			bypassHeader:       "X-Maintenance-Bypass",
-			bypassHeaderValue:  "wrong",
-			statusCode:         503,
-			path:               "/",
-			bypassPaths:        []string{},
-			bypassFavicon:      true,
-			expectedStatusCode: http.StatusServiceUnavailable,
+			name:                "Wrong bypass header value should return 503 when enabled",
+			enabled:             true,
+			bypassHeader:        "X-Maintenance-Bypass",
+			bypassHeaderValue:   "wrong",
+			statusCode:          503,
+			path:                "/",
+			bypassPaths:         []string{},
+			bypassFavicon:       true,
+			expectedStatusCode:  http.StatusServiceUnavailable,
 			expectedRedirectURL: "",
 		},
 		{
-			name:               "Custom status code (429) should be returned when specified",
-			enabled:            true,
-			bypassHeader:       "",
-			bypassHeaderValue:  "",
-			statusCode:         429,
-			path:               "/",
-			bypassPaths:        []string{},
-			bypassFavicon:      true,
-			expectedStatusCode: http.StatusTooManyRequests,
+			name:                "Custom status code (429) should be returned when specified",
+			enabled:             true,
+			bypassHeader:        "",
+			bypassHeaderValue:   "",
+			statusCode:          429,
+			path:                "/",
+			bypassPaths:         []string{},
+			bypassFavicon:       true,
+			expectedStatusCode:  http.StatusTooManyRequests,
 			expectedRedirectURL: "",
 		},
 		{
-			name:               "Correct bypass header should pass through when enabled",
-			enabled:            true,
-			bypassHeader:       "X-Maintenance-Bypass",
-			bypassHeaderValue:  "true",
-			statusCode:         503,
-			path:               "/",
-			bypassPaths:        []string{},
-			bypassFavicon:      true,
-			expectedStatusCode: http.StatusOK,
+			name:                "Correct bypass header should pass through when enabled",
+			enabled:             true,
+			bypassHeader:        "X-Maintenance-Bypass",
+			bypassHeaderValue:   "true",
+			statusCode:          503,
+			path:                "/",
+			bypassPaths:         []string{},
+			bypassFavicon:       true,
+			expectedStatusCode:  http.StatusOK,
 			expectedRedirectURL: "",
 		},
 		{
-			name:               "Should pass through when disabled regardless of header",
-			enabled:            false,
-			bypassHeader:       "",
-			bypassHeaderValue:  "",
-			statusCode:         503,
-			path:               "/",
-			bypassPaths:        []string{},
-			bypassFavicon:      true,
-			expectedStatusCode: http.StatusOK,
+			name:                "Should pass through when disabled regardless of header",
+			enabled:             false,
+			bypassHeader:        "",
+			bypassHeaderValue:   "",
+			statusCode:          503,
+			path:                "/",
+			bypassPaths:         []string{},
+			bypassFavicon:       true,
+			expectedStatusCode:  http.StatusOK,
 			expectedRedirectURL: "",
 		},
 		{
-			name:               "Should pass through when disabled even with correct header",
-			enabled:            false,
-			bypassHeader:       "X-Maintenance-Bypass",
-			bypassHeaderValue:  "true",
-			statusCode:         503,
-			path:               "/",
-			bypassPaths:        []string{},
-			bypassFavicon:      true,
-			expectedStatusCode: http.StatusOK,
+			name:                "Should pass through when disabled even with correct header",
+			enabled:             false,
+			bypassHeader:        "X-Maintenance-Bypass",
+			bypassHeaderValue:   "true",
+			statusCode:          503,
+			path:                "/",
+			bypassPaths:         []string{},
+			bypassFavicon:       true,
+			expectedStatusCode:  http.StatusOK,
 			expectedRedirectURL: "",
 		},
 		{
-			name:               "Favicon.ico should bypass maintenance mode when bypassFavicon is true",
-			enabled:            true,
-			bypassHeader:       "",
-			bypassHeaderValue:  "",
-			statusCode:         503,
-			path:               "/favicon.ico",
-			bypassPaths:        []string{},
-			bypassFavicon:      true,
-			expectedStatusCode: http.StatusOK,
+			name:                "Favicon.ico should bypass maintenance mode when bypassFavicon is true",
+			enabled:             true,
+			bypassHeader:        "",
+			bypassHeaderValue:   "",
+			statusCode:          503,
+			path:                "/favicon.ico",
+			bypassPaths:         []string{},
+			bypassFavicon:       true,
+			expectedStatusCode:  http.StatusOK,
 			expectedRedirectURL: "",
 		},
 		{
-			name:               "Favicon.ico should not bypass maintenance mode when bypassFavicon is false",
-			enabled:            true,
-			bypassHeader:       "",
-			bypassHeaderValue:  "",
-			statusCode:         503,
-			path:               "/favicon.ico",
-			bypassPaths:        []string{},
-			bypassFavicon:      false,
-			expectedStatusCode: http.StatusServiceUnavailable,
+			name:                "Favicon.ico should not bypass maintenance mode when bypassFavicon is false",
+			enabled:             true,
+			bypassHeader:        "",
+			bypassHeaderValue:   "",
+			statusCode:          503,
+			path:                "/favicon.ico",
+			bypassPaths:         []string{},
+			bypassFavicon:       false,
+			expectedStatusCode:  http.StatusServiceUnavailable,
 			expectedRedirectURL: "",
 		},
 		{
-			name:               "Path in bypassPaths should bypass maintenance mode",
-			enabled:            true,
-			bypassHeader:       "",
-			bypassHeaderValue:  "",
-			statusCode:         503,
-			path:               "/api/status",
-			bypassPaths:        []string{"/api"},
-			bypassFavicon:      true,
-			expectedStatusCode: http.StatusOK,
+			name:                "Path in bypassPaths should bypass maintenance mode",
+			enabled:             true,
+			bypassHeader:        "",
+			bypassHeaderValue:   "",
+			statusCode:          503,
+			path:                "/api/status",
+			bypassPaths:         []string{"/api"},
+			bypassFavicon:       true,
+			expectedStatusCode:  http.StatusOK,
 			expectedRedirectURL: "",
 		},
 		{
-			name:               "Path not in bypassPaths should not bypass maintenance mode",
-			enabled:            true,
-			bypassHeader:       "",
-			bypassHeaderValue:  "",
-			statusCode:         503,
-			path:               "/dashboard",
-			bypassPaths:        []string{"/api", "/health"},
-			bypassFavicon:      true,
-			expectedStatusCode: http.StatusServiceUnavailable,
+			name:                "Path not in bypassPaths should not bypass maintenance mode",
+			enabled:             true,
+			bypassHeader:        "",
+			bypassHeaderValue:   "",
+			statusCode:          503,
+			path:                "/dashboard",
+			bypassPaths:         []string{"/api", "/health"},
+			bypassFavicon:       true,
+			expectedStatusCode:  http.StatusServiceUnavailable,
 			expectedRedirectURL: "",
 		},
 	}
@@ -286,20 +286,20 @@ func TestRequestCloning(t *testing.T) {
 
 	// Create a test request
 	origReq := httptest.NewRequest(http.MethodGet, "http://example.com/test", nil)
-	
+
 	// Case 1: With bypass header - should go to next handler with unchanged request
 	bypassReq := origReq.Clone(context.Background())
 	bypassReq.Header.Set("X-Maintenance-Bypass", "true")
-	
+
 	recorder := httptest.NewRecorder()
 	middleware.ServeHTTP(recorder, bypassReq)
-	
+
 	// Case 2: Without bypass header - should go to maintenance service with cloned request
 	noBypassReq := origReq.Clone(context.Background())
-	
+
 	recorder = httptest.NewRecorder()
 	middleware.ServeHTTP(recorder, noBypassReq)
-	
+
 	// Verify the original URL remains unchanged
 	if origReq.URL.String() != "http://example.com/test" {
 		t.Errorf("Original request URL was modified")
@@ -320,15 +320,15 @@ func TestTimeoutHandling(t *testing.T) {
 	recorder := httptest.NewRecorder()
 	req := httptest.NewRequest(http.MethodGet, "http://example.com/test", nil)
 	errorHandler.ServeHTTP(recorder, req)
-	
+
 	// Check the response from the error handler
 	resp := recorder.Result()
-	
+
 	// Headers should be set by our error handler
 	if resp.Header.Get("X-Maintenance-Mode") != "true" {
 		t.Errorf("Expected X-Maintenance-Mode header to be set")
 	}
-	
+
 	// Status code should be the service unavailable code
 	if resp.StatusCode != http.StatusServiceUnavailable {
 		t.Errorf("Expected status code %d, got %d", http.StatusServiceUnavailable, resp.StatusCode)
@@ -348,7 +348,7 @@ func TestLogging(t *testing.T) {
 		t.Fatalf("Failed to create temp directory: %v", err)
 	}
 	defer os.RemoveAll(tmpDir)
-	
+
 	filePath := filepath.Join(tmpDir, "maintenance.html")
 	if err := ioutil.WriteFile(filePath, []byte("<html><body>Test</body></html>"), 0644); err != nil {
 		t.Fatalf("Failed to write maintenance file: %v", err)
@@ -356,7 +356,7 @@ func TestLogging(t *testing.T) {
 
 	// Set up a custom log writer to capture logs
 	logBuffer := &testLogWriter{}
-	
+
 	// Test cases for different log levels
 	testCases := []struct {
 		name      string
@@ -368,12 +368,12 @@ func TestLogging(t *testing.T) {
 		{"Info logging", int(LogLevelInfo), true},
 		{"Debug logging", int(LogLevelDebug), true},
 	}
-	
+
 	for _, tc := range testCases {
 		t.Run(tc.name, func(t *testing.T) {
 			// Reset the log buffer
 			logBuffer.Reset()
-			
+
 			// Create the middleware config using file path approach
 			cfg := &Config{
 				MaintenanceFilePath: filePath, // Use file instead of service
@@ -386,15 +386,15 @@ func TestLogging(t *testing.T) {
 			if err != nil {
 				t.Fatalf("Error creating middleware: %v", err)
 			}
-			
+
 			// Replace the logger with our test logger
 			middlewareInstance := middleware.(*MaintenanceBypass)
 			middlewareInstance.logger = log.New(logBuffer, "[test] ", 0)
-			
+
 			// Create a test request
 			req := httptest.NewRequest(http.MethodGet, "http://example.com/test", nil)
 			recorder := httptest.NewRecorder()
-			
+
 			// Call the middleware - this should generate logs at Info level or above
 			middleware.ServeHTTP(recorder, req)
 
@@ -403,12 +403,12 @@ func TestLogging(t *testing.T) {
 			if tc.logLevel > 0 {
 				middlewareInstance.log(LogLevel(tc.logLevel), "Test log message at level %d", tc.logLevel)
 			}
-			
+
 			// Check if logs were captured - for non-zero log levels
 			if tc.shouldLog && logBuffer.String() == "" {
 				t.Errorf("Expected logs to be captured at log level %d, but none were found", tc.logLevel)
 			}
-			
+
 			if !tc.shouldLog && logBuffer.String() != "" {
 				t.Errorf("Expected no logs at log level %d, but found: %s", tc.logLevel, logBuffer.String())
 			}
@@ -424,15 +424,15 @@ func TestInvalidMaintenanceURL(t *testing.T) {
 	})
 
 	testCases := []struct {
-		name           string
-		url            string
+		name            string
+		url             string
 		shouldHaveError bool
 	}{
 		{"Invalid URL", "://invalid", true},
 		{"Missing scheme", "maintenance-service", true},
 		{"Valid URL", "http://maintenance-service", false},
 	}
-	
+
 	for _, tc := range testCases {
 		t.Run(tc.name, func(t *testing.T) {
 			// Create the middleware config
@@ -443,7 +443,7 @@ func TestInvalidMaintenanceURL(t *testing.T) {
 
 			// Create the middleware
 			middleware, err := New(context.Background(), nextHandler, cfg, "maintenance-test")
-			
+
 			if tc.shouldHaveError {
 				if err == nil {
 					t.Errorf("Expected error for invalid URL %s, but got none", tc.url)
@@ -453,7 +453,7 @@ func TestInvalidMaintenanceURL(t *testing.T) {
 					t.Errorf("Expected no error for valid URL %s, but got: %v", tc.url, err)
 				}
 			}
-			
+
 			if !tc.shouldHaveError && middleware == nil {
 				t.Errorf("Expected middleware to be created for valid URL %s, but got nil", tc.url)
 			}
@@ -474,7 +474,7 @@ func TestMaintenanceServiceError(t *testing.T) {
 	recorder := httptest.NewRecorder()
 	req := httptest.NewRequest(http.MethodGet, "http://example.com/test", nil)
 	errorHandler.ServeHTTP(recorder, req)
-	
+
 	// Check the response
 	resp := recorder.Result()
 
@@ -482,7 +482,7 @@ func TestMaintenanceServiceError(t *testing.T) {
 	if resp.StatusCode != http.StatusServiceUnavailable {
 		t.Errorf("Expected status code %d, got %d", http.StatusServiceUnavailable, resp.StatusCode)
 	}
-	
+
 	// Maintenance mode header should be set
 	if resp.Header.Get("X-Maintenance-Mode") != "true" {
 		t.Errorf("Expected X-Maintenance-Mode header to be set")
@@ -503,14 +503,14 @@ func TestMaintenanceFile(t *testing.T) {
 		t.Fatalf("Failed to create temp directory: %v", err)
 	}
 	defer os.RemoveAll(tmpDir)
-	
+
 	htmlContent := "<html><body><h1>Under Maintenance</h1><p>We'll be back soon.</p></body></html>"
 	filePath := filepath.Join(tmpDir, "maintenance.html")
-	
+
 	if err := ioutil.WriteFile(filePath, []byte(htmlContent), 0644); err != nil {
 		t.Fatalf("Failed to write maintenance file: %v", err)
 	}
-	
+
 	// Create the middleware config
 	cfg := &Config{
 		MaintenanceFilePath: filePath,
@@ -525,7 +525,7 @@ func TestMaintenanceFile(t *testing.T) {
 	if err != nil {
 		t.Fatalf("Error creating middleware: %v", err)
 	}
-	
+
 	testCases := []struct {
 		name            string
 		bypassHeader    bool
@@ -545,46 +545,46 @@ func TestMaintenanceFile(t *testing.T) {
 			expectedContent: htmlContent,
 		},
 	}
-	
+
 	for _, tc := range testCases {
 		t.Run(tc.name, func(t *testing.T) {
 			// Create a test request
 			req := httptest.NewRequest(http.MethodGet, "http://example.com/test", nil)
-			
+
 			if tc.bypassHeader {
 				req.Header.Set("X-Maintenance-Bypass", "true")
 			}
-			
+
 			// Create a recorder to capture the response
 			recorder := httptest.NewRecorder()
-			
+
 			// Call the middleware
 			middleware.ServeHTTP(recorder, req)
-			
+
 			// Check the response
 			resp := recorder.Result()
-			
+
 			// Check status code
 			if resp.StatusCode != tc.expectedStatus {
 				t.Errorf("Expected status code %d, got %d", tc.expectedStatus, resp.StatusCode)
 			}
-			
+
 			// Check content
 			body, err := ioutil.ReadAll(resp.Body)
 			if err != nil {
 				t.Fatalf("Error reading response body: %v", err)
 			}
-			
+
 			if string(body) != tc.expectedContent {
 				t.Errorf("Expected content %q, got %q", tc.expectedContent, string(body))
 			}
-			
+
 			// Check headers for maintenance mode
 			if !tc.bypassHeader {
 				if resp.Header.Get("X-Maintenance-Mode") != "true" {
 					t.Errorf("Expected X-Maintenance-Mode header to be set")
 				}
-				
+
 				if resp.Header.Get("Content-Type") != "text/html; charset=utf-8" {
 					t.Errorf("Expected Content-Type header to be set to text/html")
 				}
@@ -601,20 +601,20 @@ func TestMaintenanceFileModification(t *testing.T) {
 		t.Fatalf("Failed to create temp directory: %v", err)
 	}
 	defer os.RemoveAll(tmpDir)
-	
+
 	// Create maintenance file with content
 	content := "<html><body>Maintenance Page Content</body></html>"
 	filePath := filepath.Join(tmpDir, "maintenance.html")
-	
+
 	err = ioutil.WriteFile(filePath, []byte(content), 0644)
 	if err != nil {
 		t.Fatalf("Failed to write maintenance file: %v", err)
 	}
-	
+
 	// Create a test response recorder and request
 	recorder := httptest.NewRecorder()
 	req := httptest.NewRequest(http.MethodGet, "http://example.com/path", nil)
-	
+
 	// Create simple file serving handler that behaves like our maintenance handler
 	fileHandler := http.HandlerFunc(func(rw http.ResponseWriter, req *http.Request) {
 		// Read the content
@@ -622,60 +622,60 @@ func TestMaintenanceFileModification(t *testing.T) {
 		if err != nil {
 			t.Fatalf("Failed to read file: %v", err)
 		}
-		
+
 		// Set headers
 		rw.Header().Set("Content-Type", "text/html; charset=utf-8")
 		rw.Header().Set("X-Maintenance-Mode", "true")
-		
+
 		// Write status and content
 		rw.WriteHeader(http.StatusServiceUnavailable)
 		rw.Write(fileContent)
 	})
-	
+
 	// Serve the file
 	fileHandler.ServeHTTP(recorder, req)
-	
+
 	// Check response
 	resp := recorder.Result()
 	body, _ := ioutil.ReadAll(resp.Body)
-	
+
 	// Verify status code
 	if resp.StatusCode != http.StatusServiceUnavailable {
 		t.Errorf("Expected status code %d, got %d", http.StatusServiceUnavailable, resp.StatusCode)
 	}
-	
+
 	// Verify content
 	if string(body) != content {
 		t.Errorf("Expected content %q, got %q", content, string(body))
 	}
-	
+
 	// Verify headers
 	if resp.Header.Get("X-Maintenance-Mode") != "true" {
 		t.Errorf("Expected X-Maintenance-Mode header to be set")
 	}
-	
+
 	if resp.Header.Get("Content-Type") != "text/html; charset=utf-8" {
 		t.Errorf("Expected correct Content-Type header, got %q", resp.Header.Get("Content-Type"))
 	}
-	
+
 	// Update the file content
 	updatedContent := "<html><body>Updated Maintenance Page Content</body></html>"
 	err = ioutil.WriteFile(filePath, []byte(updatedContent), 0644)
 	if err != nil {
 		t.Fatalf("Failed to update maintenance file: %v", err)
 	}
-	
+
 	// Create a new recorder for the second request
 	recorder2 := httptest.NewRecorder()
 	req2 := httptest.NewRequest(http.MethodGet, "http://example.com/path", nil)
-	
+
 	// Serve the updated file
 	fileHandler.ServeHTTP(recorder2, req2)
-	
+
 	// Check updated response
 	resp2 := recorder2.Result()
 	body2, _ := ioutil.ReadAll(resp2.Body)
-	
+
 	// Verify updated content
 	if string(body2) != updatedContent {
 		t.Errorf("Expected updated content %q, got %q", updatedContent, string(body2))
@@ -711,11 +711,20 @@ func TestConfigValidation(t *testing.T) {
 			shouldHaveErr: false,
 		},
 		{
-			name: "Invalid config with neither service nor file",
+			name: "Valid config with maintenance content",
 			config: &Config{
-				MaintenanceService: "",
-				MaintenanceFilePath: "",
+				MaintenanceContent: "<html><body>Maintenance content</body></html>",
 				Enabled:            true,
+			},
+			shouldHaveErr: false,
+		},
+		{
+			name: "Invalid config with no maintenance option",
+			config: &Config{
+				MaintenanceService:  "",
+				MaintenanceFilePath: "",
+				MaintenanceContent:  "",
+				Enabled:             true,
 			},
 			shouldHaveErr: true,
 		},
@@ -728,23 +737,23 @@ func TestConfigValidation(t *testing.T) {
 			shouldHaveErr: true,
 		},
 	}
-	
+
 	// Create test directory and file for valid file test
 	testDataDir := filepath.Join("testdata")
 	os.MkdirAll(testDataDir, 0755)
 	defer os.RemoveAll(testDataDir)
-	
+
 	testFile := filepath.Join(testDataDir, "maintenance.html")
 	ioutil.WriteFile(testFile, []byte("<html><body>Test</body></html>"), 0644)
-	
+
 	for _, tc := range testCases {
 		t.Run(tc.name, func(t *testing.T) {
 			_, err := New(context.Background(), nextHandler, tc.config, "maintenance-test")
-			
+
 			if tc.shouldHaveErr && err == nil {
 				t.Errorf("Expected error but got none")
 			}
-			
+
 			if !tc.shouldHaveErr && err != nil {
 				t.Errorf("Expected no error but got: %v", err)
 			}
@@ -755,48 +764,52 @@ func TestConfigValidation(t *testing.T) {
 // TestCreateConfig tests the CreateConfig function returns correct default values
 func TestCreateConfig(t *testing.T) {
 	config := CreateConfig()
-	
+
 	// Check default values
-	if config.MaintenanceService != "http://maintenance-page-service" {
-		t.Errorf("Expected default MaintenanceService to be 'http://maintenance-page-service', got %q", config.MaintenanceService)
+	if config.MaintenanceService != "" {
+		t.Errorf("Expected default MaintenanceService to be empty, got %q", config.MaintenanceService)
 	}
-	
+
 	if config.MaintenanceFilePath != "" {
 		t.Errorf("Expected default MaintenanceFilePath to be empty, got %q", config.MaintenanceFilePath)
 	}
-	
+
+	if config.MaintenanceContent != "" {
+		t.Errorf("Expected default MaintenanceContent to be empty, got %q", config.MaintenanceContent)
+	}
+
 	if config.BypassHeader != "X-Maintenance-Bypass" {
 		t.Errorf("Expected default BypassHeader to be 'X-Maintenance-Bypass', got %q", config.BypassHeader)
 	}
-	
+
 	if config.BypassHeaderValue != "true" {
 		t.Errorf("Expected default BypassHeaderValue to be 'true', got %q", config.BypassHeaderValue)
 	}
-	
+
 	if !config.Enabled {
 		t.Errorf("Expected default Enabled to be true, got false")
 	}
-	
+
 	if config.StatusCode != 503 {
 		t.Errorf("Expected default StatusCode to be 503, got %d", config.StatusCode)
 	}
-	
+
 	if len(config.BypassPaths) != 0 {
 		t.Errorf("Expected default BypassPaths to be empty, got %v", config.BypassPaths)
 	}
-	
+
 	if !config.BypassFavicon {
 		t.Errorf("Expected default BypassFavicon to be true, got false")
 	}
-	
+
 	if config.LogLevel != int(LogLevelError) {
 		t.Errorf("Expected default LogLevel to be %d, got %d", int(LogLevelError), config.LogLevel)
 	}
-	
+
 	if config.MaintenanceTimeout != 10 {
 		t.Errorf("Expected default MaintenanceTimeout to be 10, got %d", config.MaintenanceTimeout)
 	}
-	
+
 	if config.ContentType != "text/html; charset=utf-8" {
 		t.Errorf("Expected default ContentType to be 'text/html; charset=utf-8', got %q", config.ContentType)
 	}
@@ -808,49 +821,49 @@ func TestLoadMaintenanceFileErrors(t *testing.T) {
 	nextHandler := http.HandlerFunc(func(rw http.ResponseWriter, req *http.Request) {
 		rw.WriteHeader(http.StatusOK)
 	})
-	
+
 	// Test with a non-existent file
 	cfg := &Config{
 		MaintenanceFilePath: "/path/to/nonexistent/file.html",
 		Enabled:             true,
 	}
-	
+
 	// This should fail at middleware creation time
 	_, err := New(context.Background(), nextHandler, cfg, "maintenance-test")
 	if err == nil {
 		t.Errorf("Expected error when file doesn't exist, got nil")
 	}
-	
+
 	// Test with a directory instead of a file
 	tmpDir, err := ioutil.TempDir("", "maintenance-test-dir")
 	if err != nil {
 		t.Fatalf("Failed to create temp directory: %v", err)
 	}
 	defer os.RemoveAll(tmpDir)
-	
+
 	cfg = &Config{
 		MaintenanceFilePath: tmpDir, // Directory, not a file
 		Enabled:             true,
 	}
-	
+
 	// This should fail because it's a directory, not a file
 	_, err = New(context.Background(), nextHandler, cfg, "maintenance-test")
 	if err == nil {
 		t.Errorf("Expected error when path is a directory, got nil")
 	}
-	
+
 	// Test with an empty file
 	emptyFilePath := filepath.Join(tmpDir, "empty.html")
 	err = ioutil.WriteFile(emptyFilePath, []byte{}, 0644)
 	if err != nil {
 		t.Fatalf("Failed to create empty test file: %v", err)
 	}
-	
+
 	cfg = &Config{
 		MaintenanceFilePath: emptyFilePath,
 		Enabled:             true,
 	}
-	
+
 	// This should fail because the file is empty
 	_, err = New(context.Background(), nextHandler, cfg, "maintenance-test")
 	if err == nil {
@@ -858,7 +871,7 @@ func TestLoadMaintenanceFileErrors(t *testing.T) {
 	} else if !strings.Contains(err.Error(), "maintenance file is empty") {
 		t.Errorf("Expected error to mention empty file, got: %v", err)
 	}
-	
+
 	// Test with a file without read permissions
 	// Create a file
 	filePath := filepath.Join(tmpDir, "no-read-perm.html")
@@ -866,14 +879,14 @@ func TestLoadMaintenanceFileErrors(t *testing.T) {
 	if err != nil {
 		t.Fatalf("Failed to create test file: %v", err)
 	}
-	
+
 	// Skip this test on Windows as permissions work differently
 	if os.Getenv("OS") != "Windows_NT" {
 		cfg = &Config{
 			MaintenanceFilePath: filePath,
 			Enabled:             true,
 		}
-		
+
 		// This should fail because file is not readable
 		_, err = New(context.Background(), nextHandler, cfg, "maintenance-test")
 		if err == nil {
@@ -888,71 +901,71 @@ func TestServeMaintenanceFileErrors(t *testing.T) {
 	nextHandler := http.HandlerFunc(func(rw http.ResponseWriter, req *http.Request) {
 		rw.WriteHeader(http.StatusOK)
 	})
-	
+
 	// Create a temporary file
 	tmpDir, err := ioutil.TempDir("", "maintenance-test-logging")
 	if err != nil {
 		t.Fatalf("Failed to create temp directory: %v", err)
 	}
 	defer os.RemoveAll(tmpDir)
-	
+
 	filePath := filepath.Join(tmpDir, "maintenance.html")
 	err = ioutil.WriteFile(filePath, []byte("<html><body>Test</body></html>"), 0644)
 	if err != nil {
 		t.Fatalf("Failed to create test file: %v", err)
 	}
-	
+
 	// Create the middleware
 	cfg := &Config{
 		MaintenanceFilePath: filePath,
 		Enabled:             true,
 		StatusCode:          503,
 	}
-	
+
 	middleware, err := New(context.Background(), nextHandler, cfg, "maintenance-bypass")
 	if err != nil {
 		t.Fatalf("Error creating middleware: %v", err)
 	}
-	
+
 	// Get the maintenance bypass instance
 	m := middleware.(*MaintenanceBypass)
-	
+
 	// Create a test recorder and request
 	recorder := httptest.NewRecorder()
 	req := httptest.NewRequest(http.MethodGet, "http://example.com/path", nil)
-	
+
 	// First, serve the file normally to make sure it works
 	m.serveMaintenanceFile(recorder, req)
-	
+
 	// Check response
 	resp := recorder.Result()
 	if resp.StatusCode != 503 {
 		t.Errorf("Expected status code 503, got %d", resp.StatusCode)
 	}
-	
+
 	if resp.Header.Get("X-Maintenance-Mode") != "true" {
 		t.Errorf("Expected X-Maintenance-Mode header to be set")
 	}
-	
+
 	// Now make the file unreadable to simulate failure
 	// We'll replace the file path with a non-existent one
 	m.maintenanceFilePath = "/nonexistent/file.html"
-	
-	// Create a new recorder 
+
+	// Create a new recorder
 	recorder = httptest.NewRecorder()
 	req = httptest.NewRequest(http.MethodGet, "http://example.com/path", nil)
-	
+
 	// Call serveMaintenanceFile again - this should handle the error
 	m.serveMaintenanceFile(recorder, req)
-	
+
 	// Check that we got the expected error response
 	resp = recorder.Result()
-	
+
 	// Should still return a response with the configured status code
 	if resp.StatusCode != m.statusCode {
 		t.Errorf("Expected status code %d even with file error, got %d", m.statusCode, resp.StatusCode)
 	}
-	
+
 	// Maintenance mode header should still be set
 	if resp.Header.Get("X-Maintenance-Mode") != "true" {
 		t.Errorf("Expected X-Maintenance-Mode header to be set even with file error")
@@ -965,33 +978,33 @@ func TestProxyToMaintenanceServiceErrorHandler(t *testing.T) {
 	nextHandler := http.HandlerFunc(func(rw http.ResponseWriter, req *http.Request) {
 		rw.WriteHeader(http.StatusOK)
 	})
-	
+
 	// Create a maintenance service that will always fail
 	maintenanceServer := httptest.NewServer(http.HandlerFunc(func(rw http.ResponseWriter, req *http.Request) {
 		// This will never be called because we'll use a mock transport
 		panic("should not be called")
 	}))
 	defer maintenanceServer.Close()
-	
+
 	// Create the middleware
 	cfg := &Config{
 		MaintenanceService: maintenanceServer.URL,
 		Enabled:            true,
 		StatusCode:         503,
 	}
-	
+
 	middleware, err := New(context.Background(), nextHandler, cfg, "maintenance-test")
 	if err != nil {
 		t.Fatalf("Error creating middleware: %v", err)
 	}
-	
+
 	// Get access to the MaintenanceBypass instance
 	m := middleware.(*MaintenanceBypass)
-	
+
 	// Create a test recorder and request
 	recorder := httptest.NewRecorder()
 	req := httptest.NewRequest(http.MethodGet, "http://example.com/test", nil)
-	
+
 	// Create our own custom error handler like the one in the proxyToMaintenanceService method
 	errorHandler := func(rw http.ResponseWriter, req *http.Request, err error) {
 		m.log(LogLevelError, "Error proxying to maintenance service: %v", err)
@@ -999,23 +1012,23 @@ func TestProxyToMaintenanceServiceErrorHandler(t *testing.T) {
 		rw.WriteHeader(m.statusCode)
 		rw.Write([]byte("Service temporarily unavailable"))
 	}
-	
+
 	// Call the error handler directly with a sample error
 	errorHandler(recorder, req, fmt.Errorf("simulated error"))
-	
+
 	// Check the response
 	resp := recorder.Result()
-	
+
 	// Should have the configured status code
 	if resp.StatusCode != 503 {
 		t.Errorf("Expected status code 503 from error handler, got %d", resp.StatusCode)
 	}
-	
+
 	// Maintenance mode header should be set
 	if resp.Header.Get("X-Maintenance-Mode") != "true" {
 		t.Errorf("Expected X-Maintenance-Mode header to be set by error handler")
 	}
-	
+
 	// Body should contain error message
 	body, _ := ioutil.ReadAll(resp.Body)
 	if !strings.Contains(string(body), "Service temporarily unavailable") {
@@ -1029,53 +1042,53 @@ func TestLoadMaintenanceFileModificationTime(t *testing.T) {
 	nextHandler := http.HandlerFunc(func(rw http.ResponseWriter, req *http.Request) {
 		rw.WriteHeader(http.StatusOK)
 	})
-	
+
 	// Create a temporary file
 	tmpDir, err := ioutil.TempDir("", "maintenance-test-modtime")
 	if err != nil {
 		t.Fatalf("Failed to create temp directory: %v", err)
 	}
 	defer os.RemoveAll(tmpDir)
-	
+
 	filePath := filepath.Join(tmpDir, "maintenance.html")
 	originalContent := "<html><body>Original</body></html>"
 	err = ioutil.WriteFile(filePath, []byte(originalContent), 0644)
 	if err != nil {
 		t.Fatalf("Failed to create test file: %v", err)
 	}
-	
+
 	// Create the middleware
 	cfg := &Config{
 		MaintenanceFilePath: filePath,
 		Enabled:             true,
 	}
-	
+
 	middleware, err := New(context.Background(), nextHandler, cfg, "maintenance-test")
 	if err != nil {
 		t.Fatalf("Error creating middleware: %v", err)
 	}
-	
+
 	// Get the maintenance bypass instance
 	m := middleware.(*MaintenanceBypass)
-	
+
 	// First load should have loaded the file
 	if m.maintenanceFileContent == nil {
 		t.Fatalf("File content should have been loaded during initialization")
 	}
-	
+
 	if string(m.maintenanceFileContent) != originalContent {
 		t.Errorf("Expected content to be %q, got %q", originalContent, string(m.maintenanceFileContent))
 	}
-	
+
 	initialModTime := m.maintenanceFileLastMod
-	
+
 	// Call loadMaintenanceFile again but without changing the file
 	// This should not reload the file
 	err = m.loadMaintenanceFile()
 	if err != nil {
 		t.Fatalf("Error loading maintenance file: %v", err)
 	}
-	
+
 	// The mod time should be the same
 	if !m.maintenanceFileLastMod.Equal(initialModTime) {
 		t.Errorf("Mod time should not have changed when file wasn't modified")
@@ -1085,44 +1098,44 @@ func TestLoadMaintenanceFileModificationTime(t *testing.T) {
 // TestWriteHeaderOrder tests the ordering of header setting in the custom writer
 func TestWriteHeaderOrder(t *testing.T) {
 	// This tests the edge cases of the custom response writer
-	
+
 	// 1. Test when Write is called first
 	recorder1 := httptest.NewRecorder()
 	writer1 := &maintenanceResponseWriter{
 		ResponseWriter: recorder1,
-		statusCode: 503,
+		statusCode:     503,
 	}
-	
+
 	writer1.Write([]byte("test"))
-	
+
 	if recorder1.Code != 503 {
 		t.Errorf("Expected status code to be set to 503 when Write is called first, got %d", recorder1.Code)
 	}
-	
+
 	// 2. Test when WriteHeader is called first
 	recorder2 := httptest.NewRecorder()
 	writer2 := &maintenanceResponseWriter{
 		ResponseWriter: recorder2,
-		statusCode: 503,
+		statusCode:     503,
 	}
-	
+
 	writer2.WriteHeader(200) // Should use 503 instead
 	writer2.Write([]byte("test"))
-	
+
 	if recorder2.Code != 503 {
 		t.Errorf("Expected status code to be set to 503 when WriteHeader is called first, got %d", recorder2.Code)
 	}
-	
+
 	// 3. Test multiple Write calls
 	recorder3 := httptest.NewRecorder()
 	writer3 := &maintenanceResponseWriter{
 		ResponseWriter: recorder3,
-		statusCode: 503,
+		statusCode:     503,
 	}
-	
+
 	writer3.Write([]byte("first"))
 	writer3.Write([]byte(" second"))
-	
+
 	if recorder3.Body.String() != "first second" {
 		t.Errorf("Expected body to be 'first second', got %q", recorder3.Body.String())
 	}
@@ -1142,7 +1155,7 @@ func TestProxyToMaintenanceService(t *testing.T) {
 		if req.URL.Path == "/test-path" {
 			t.Logf("Received correctly forwarded request to path: %s", req.URL.Path)
 		}
-		
+
 		// Set a custom header to verify it gets passed through
 		rw.Header().Set("X-Test-Header", "test-value")
 		rw.WriteHeader(http.StatusOK)
@@ -1170,75 +1183,151 @@ func TestProxyToMaintenanceService(t *testing.T) {
 	// Create a test recorder and request with a specific path
 	recorder := httptest.NewRecorder()
 	req := httptest.NewRequest(http.MethodGet, "http://example.com/test-path", nil)
-	
+
 	// Add some custom headers to verify they're forwarded
 	req.Header.Set("X-Custom-Header", "custom-value")
-	
+
 	// We need to set the header explicitly since we're not going through ServeHTTP
 	recorder.Header().Set("X-Maintenance-Mode", "true")
-	
+
 	// Call proxyToMaintenanceService directly
 	m.proxyToMaintenanceService(recorder, req)
-	
+
 	// Check the response
 	resp := recorder.Result()
 	body, _ := ioutil.ReadAll(resp.Body)
-	
+
 	// Should have the configured status code (503) even though the mock server returned 200
 	if resp.StatusCode != cfg.StatusCode {
 		t.Errorf("Expected status code %d, got %d", cfg.StatusCode, resp.StatusCode)
 	}
-	
+
 	// Should have the maintenance mode header
 	if resp.Header.Get("X-Maintenance-Mode") != "true" {
 		t.Errorf("Expected X-Maintenance-Mode header to be set")
 	}
-	
+
 	// The custom header from the mock server should be preserved
 	if resp.Header.Get("X-Test-Header") != "test-value" {
-		t.Errorf("Expected X-Test-Header: test-value to be preserved, got: %s", 
+		t.Errorf("Expected X-Test-Header: test-value to be preserved, got: %s",
 			resp.Header.Get("X-Test-Header"))
 	}
-	
+
 	// The content should be preserved
 	if !strings.Contains(string(body), "Maintenance Page Content") {
 		t.Errorf("Expected response to contain mock maintenance content, got: %s", string(body))
 	}
-	
+
 	// Test error handling with a deliberately invalid URL
 	mockInvalidServer := httptest.NewServer(http.HandlerFunc(func(rw http.ResponseWriter, req *http.Request) {
 		// This should never be called
 		t.Error("Invalid server should not be called")
 	}))
 	mockInvalidServer.Close() // Close immediately to cause connection error
-	
+
 	// Update the middleware to use the closed server
 	invalidURL, _ := url.Parse(mockInvalidServer.URL)
 	m.maintenanceService = invalidURL
-	
+
 	// Create a new recorder and request
 	recorder = httptest.NewRecorder()
 	req = httptest.NewRequest(http.MethodGet, "http://example.com/test-path", nil)
-	
+
 	// This should trigger the error handler
 	m.proxyToMaintenanceService(recorder, req)
-	
+
 	// Check the error response
 	resp = recorder.Result()
 	body, _ = ioutil.ReadAll(resp.Body)
-	
+
 	// Should still have the configured status code
 	if resp.StatusCode != cfg.StatusCode {
 		t.Errorf("Expected status code %d for error handling, got %d", cfg.StatusCode, resp.StatusCode)
 	}
-	
+
 	// Should have the maintenance mode header
 	if resp.Header.Get("X-Maintenance-Mode") != "true" {
 		t.Errorf("Expected X-Maintenance-Mode header to be set for error handling")
 	}
-	
+
 	// The content should contain the error message
 	if !strings.Contains(string(body), "Service temporarily unavailable") {
 		t.Errorf("Expected error response to contain unavailable message, got: %s", string(body))
 	}
-} 
+}
+
+// TestMaintenanceContent tests serving direct content provided in the config
+func TestMaintenanceContent(t *testing.T) {
+	// Create a test handler
+	nextHandler := http.HandlerFunc(func(rw http.ResponseWriter, req *http.Request) {
+		rw.WriteHeader(http.StatusOK)
+		rw.Write([]byte("This is the real service content"))
+	})
+
+	// Set test content
+	testContent := "<html><body><h1>Test Maintenance Content</h1></body></html>"
+
+	// Create config
+	cfg := &Config{
+		MaintenanceContent: testContent,
+		Enabled:            true,
+		StatusCode:         http.StatusServiceUnavailable,
+		ContentType:        "text/html; charset=utf-8",
+		BypassHeader:       "X-Test-Bypass",
+		BypassHeaderValue:  "secret",
+	}
+
+	// Create middleware
+	middleware, err := New(context.Background(), nextHandler, cfg, "maintenance-test")
+	if err != nil {
+		t.Fatalf("Error creating middleware: %v", err)
+	}
+
+	// Test 1: Request without bypass header should get maintenance content
+	recorder := httptest.NewRecorder()
+	req := httptest.NewRequest(http.MethodGet, "http://example.com/test", nil)
+
+	middleware.ServeHTTP(recorder, req)
+
+	resp := recorder.Result()
+	body, _ := ioutil.ReadAll(resp.Body)
+
+	// Check status code
+	if resp.StatusCode != http.StatusServiceUnavailable {
+		t.Errorf("Expected status code %d, got %d", http.StatusServiceUnavailable, resp.StatusCode)
+	}
+
+	// Check content type
+	if resp.Header.Get("Content-Type") != "text/html; charset=utf-8" {
+		t.Errorf("Expected Content-Type %q, got %q", "text/html; charset=utf-8", resp.Header.Get("Content-Type"))
+	}
+
+	// Check maintenance mode header
+	if resp.Header.Get("X-Maintenance-Mode") != "true" {
+		t.Errorf("Expected X-Maintenance-Mode header to be 'true', got %q", resp.Header.Get("X-Maintenance-Mode"))
+	}
+
+	// Check content
+	if string(body) != testContent {
+		t.Errorf("Expected body %q, got %q", testContent, string(body))
+	}
+
+	// Test 2: Request with bypass header should go to real service
+	recorder = httptest.NewRecorder()
+	req = httptest.NewRequest(http.MethodGet, "http://example.com/test", nil)
+	req.Header.Set("X-Test-Bypass", "secret")
+
+	middleware.ServeHTTP(recorder, req)
+
+	resp = recorder.Result()
+	body, _ = ioutil.ReadAll(resp.Body)
+
+	// Should get the real service response
+	if resp.StatusCode != http.StatusOK {
+		t.Errorf("Expected status code %d, got %d", http.StatusOK, resp.StatusCode)
+	}
+
+	if string(body) != "This is the real service content" {
+		t.Errorf("Expected body %q, got %q", "This is the real service content", string(body))
+	}
+}

@@ -27,13 +27,25 @@ jobs:
         echo "percentage=$COVERAGE" >> $GITHUB_OUTPUT
         echo "Total coverage: $COVERAGE%"
 
+    - name: Verify 100% coverage
+      run: |
+        COVERAGE="${{ steps.coverage.outputs.percentage }}"
+        if (( $(echo "$COVERAGE < 100" | bc -l) )); then
+          echo "Error: Code coverage is less than 100% (actual: $COVERAGE%)"
+          exit 1
+        else
+          echo "Success: 100% code coverage achieved!"
+        fi
+
     - name: Create coverage.json file
       if: github.ref == 'refs/heads/main'
       run: |
         COVERAGE="${{ steps.coverage.outputs.percentage }}"
-        if (( $(echo "$COVERAGE >= 80" | bc -l) )); then
+        if (( $(echo "$COVERAGE >= 100" | bc -l) )); then
+          COLOR="brightgreen"
+        elif (( $(echo "$COVERAGE >= 95" | bc -l) )); then
           COLOR="green"
-        elif (( $(echo "$COVERAGE >= 60" | bc -l) )); then
+        elif (( $(echo "$COVERAGE >= 90" | bc -l) )); then
           COLOR="yellow"
         else
           COLOR="red"

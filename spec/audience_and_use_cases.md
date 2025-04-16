@@ -108,7 +108,8 @@
 - Pre-configured maintenance settings ready for emergency activation
 - Simple configuration toggle to enable maintenance mode
 - Secure bypass headers for emergency response team
-- File-based static pages ensure reliability during system instability
+- Inline content option for fastest deployment with no file dependencies
+- File-based static pages for longer maintenance periods
 
 ### Use Case 4: Rolling Deployments
 
@@ -138,4 +139,21 @@
 - Scheduled activation of maintenance mode via infrastructure as code
 - Logging for compliance documentation
 - Custom status codes and headers for proper client handling
-- Professional maintenance pages with compliance information 
+- Professional maintenance pages with compliance information
+
+### Use Case 6: Edge or Remote Environments
+
+**Scenario:** Deploying maintenance mode in edge computing or remote environments with limited resources.
+
+**Pain Points:**
+- Limited file system access or permissions in edge environments
+- Network constraints when serving maintenance content
+- Need for quick deployment without dependencies
+- Limited ability to update content after deployment
+
+**Solution:**
+- Content-based maintenance with inline HTML directly in configuration
+- No need for file access or network connectivity to separate services
+- Instant deployment with single configuration change
+- Consistent experience across all edge locations
+- Minimal resource requirements with no external dependencies 

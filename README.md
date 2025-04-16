@@ -12,7 +12,7 @@ Maintenance Warden is a lightweight, high-performance middleware plugin for Trae
 
 ## Key Features
 
-- **Dual-Mode Flexibility**: Choose between simple file-based maintenance pages or dynamic service-based content
+- **Triple-Mode Flexibility**: Choose between file-based, content-based, or service-based maintenance pages
 - **Selective Access Control**: Maintain service access for authorized users via configurable bypass headers
 - **Path-Based Exceptions**: Configure specific paths to bypass maintenance mode automatically
 - **Low Overhead**: Minimal performance impact with optimized request handling
@@ -30,6 +30,7 @@ This plugin serves a maintenance page when maintenance mode is enabled, while al
    - Whether the request is for favicon.ico (if bypassFavicon is true)
 4. If any bypass condition is met, the request proceeds to the intended service
 5. If no bypass condition is met:
+   - If `maintenanceContent` is set, the middleware serves the inline HTML content
    - If `maintenanceFilePath` is set, the middleware serves the static HTML file
    - If `maintenanceService` is set, the request is proxied to the maintenance service
    - The configured status code is used (default: 503)
@@ -45,6 +46,7 @@ flowchart TB
     E -->|Bypass Header Match\nor Path Match| D
     E -->|No Bypass Match| F{Content Type}
     F -->|File-Based| G[Serve Maintenance File]
+    F -->|Content-Based| I[Serve Inline Content]
     F -->|Service-Based| H[Proxy to Maintenance Service]
 ```
 
@@ -52,11 +54,12 @@ flowchart TB
 
 This plugin is designed with a focus on simplicity and reliability for static maintenance pages. It is optimized for the common use case of serving a simple "We're down for maintenance" page, rather than complex dynamic content.
 
-The plugin offers two ways to serve maintenance pages:
+The plugin offers three ways to serve maintenance pages:
 1. **File-based**: Serve a static HTML file directly from disk
-2. **Service-based**: Proxy requests to a dedicated maintenance service
+2. **Content-based**: Serve inline HTML content defined in the configuration
+3. **Service-based**: Proxy requests to a dedicated maintenance service
 
-The file-based approach is simpler and more reliable, while the service-based approach offers more flexibility for dynamic content.
+The file-based and content-based approaches are simpler and more reliable, while the service-based approach offers more flexibility for dynamic content.
 
 ## Configuration
 
@@ -109,14 +112,32 @@ http:
             - "/api/status"
           maintenanceTimeout: 10
           logLevel: 1
+
+# Example 3: Using inline content (simplest option for basic maintenance pages)
+http:
+  middlewares:
+    maintenance-warden:
+      plugin:
+        maintenance-warden:
+          maintenanceContent: "<html><body><h1>Under Maintenance</h1><p>Our service is currently undergoing scheduled maintenance. We'll be back shortly.</p></body></html>"
+          contentType: "text/html; charset=utf-8"
+          bypassHeader: "X-Maintenance-Bypass"
+          bypassHeaderValue: "true"
+          enabled: true
+          statusCode: 503
+          bypassPaths:
+            - "/health"
+            - "/api/status"
+          logLevel: 1
 ```
 
 ## Configuration Options
 
 | Option | Type | Default | Description |
 |--------|------|---------|-------------|
-| `maintenanceService` | string | `"http://maintenance-page-service"` | URL of the maintenance service to redirect to |
+| `maintenanceService` | string | `""` | URL of the maintenance service to redirect to |
 | `maintenanceFilePath` | string | `""` | Path to a static HTML file to serve (takes precedence over maintenanceService) |
+| `maintenanceContent` | string | `""` | Direct HTML content to serve (takes precedence over maintenanceFilePath and maintenanceService) |
 | `contentType` | string | `"text/html; charset=utf-8"` | Content type header when serving a static file |
 | `bypassHeader` | string | `"X-Maintenance-Bypass"` | Name of the header that allows bypassing maintenance mode |
 | `bypassHeaderValue` | string | `"true"` | Expected value of the bypass header |
@@ -129,7 +150,7 @@ http:
 
 ## Technical Features
 
-### 1. Dual Content Serving Modes
+### 1. Content Serving Modes
 
 #### File-Based Maintenance
 - **Implementation**: Direct file serving from disk
@@ -137,6 +158,13 @@ http:
 - **Caching**: File content is cached in memory for efficiency
 - **Change Detection**: Checks file modification times to auto-reload
 - **Resource Usage**: Minimal memory footprint (~size of HTML file)
+
+#### Content-Based Maintenance
+- **Implementation**: Direct string content serving from configuration
+- **Performance**: Highest performance with zero latency
+- **Simplicity**: No file access or network required
+- **Deployment**: Content directly embedded in configuration
+- **Resource Usage**: Minimal memory footprint (only size of content string)
 
 #### Service-Based Maintenance
 - **Implementation**: HTTP reverse proxy to maintenance service
@@ -169,9 +197,14 @@ http:
 - **Default**: "text/html; charset=utf-8"
 - **Flexibility**: Supports any valid content type
 
-## Choosing Between File-based and Service-based Maintenance
+## Choosing Between Maintenance Page Options
 
-### File-based Maintenance (Recommended)
+### Content-based Maintenance (Simplest)
+- **Pros**: Simplest setup, no dependencies, fastest performance, no file/network access
+- **Cons**: Content must be included directly in configuration, limited size
+- **Best for**: Simple static maintenance messages with minimal content
+
+### File-based Maintenance (Recommended for most cases)
 - **Pros**: Simple, reliable, no network dependency, low overhead
 - **Cons**: Static content only, must be deployed on each Traefik instance
 - **Best for**: Most maintenance scenarios with simple static pages
@@ -257,8 +290,9 @@ http:
           # Choose one of these options:
           maintenanceFilePath: "/etc/traefik/maintenance.html"  # File-based (preferred)
           # maintenanceService: "http://maintenance.internal"  # Service-based
+          # maintenanceContent: "<html><body><h1>Under Maintenance</h1><p>We'll be back soon.</p></body></html>"  # Content-based
           
-          # Content settings (for file-based)
+          # Content settings (for file-based and content-based)
           contentType: "text/html; charset=utf-8"
           
           # Basic settings

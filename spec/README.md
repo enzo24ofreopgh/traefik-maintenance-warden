@@ -22,7 +22,7 @@ The plugin is designed with simplicity, reliability, and flexibility in mind, ma
 
 ## Key Features
 
-- **Dual-Mode Flexibility**: Choose between simple file-based maintenance pages or dynamic service-based content
+- **Triple-Mode Flexibility**: Choose between file-based, content-based, or service-based maintenance pages
 - **Selective Access Control**: Maintain service access for authorized users via configurable bypass headers
 - **Path-Based Exceptions**: Configure specific paths to bypass maintenance mode automatically
 - **Low Overhead**: Minimal performance impact with optimized request handling
