@@ -203,6 +203,7 @@ http:
 - **Pros**: Simplest setup, no dependencies, fastest performance, no file/network access
 - **Cons**: Content must be included directly in configuration, limited size
 - **Best for**: Simple static maintenance messages with minimal content
+- **Ideal for**: Containerized environments where file persistence is limited or unavailable
 
 ### File-based Maintenance (Recommended for most cases)
 - **Pros**: Simple, reliable, no network dependency, low overhead
