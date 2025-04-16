@@ -1,8 +1,8 @@
-<img src=".assets/icon.png" alt="Maintenance Warden Logo" width="100" align="right" />
+<img src="https://raw.githubusercontent.com/TechAlchemistry/traefik-maintenance-warden/main/.assets/icon.png" alt="Maintenance Warden Logo" width="100" align="right" />
 
 # Maintenance Warden: Flexible Maintenance Mode Plugin for Traefik
 
-[![Test and Coverage](https://github.com/TechAlchemistry/traefik-maintenance-warden/actions/workflows/test.yml/badge.svg)](https://github.com/TechAlchemistry/traefik-maintenance-warden/actions/workflows/test.yml)
+[![Test and Coverage](https://img.shields.io/github/actions/workflow/status/TechAlchemistry/traefik-maintenance-warden/test.yml?branch=main&label=Tests&nbsp;and&nbsp;Coverage)](https://github.com/TechAlchemistry/traefik-maintenance-warden/actions/workflows/test.yml)
 [![Coverage](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/TechAlchemistry/bdb9ae1d94d9c4031d310fc2a231d6b8/raw/coverage.json)](https://github.com/TechAlchemistry/traefik-maintenance-warden/actions/workflows/test.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
@@ -79,7 +79,24 @@ experimental:
 ```yaml
 # Dynamic configuration in YAML
 
-# Example 1: Using a static HTML file (recommended for simple maintenance pages)
+# Example 1: Using inline content (simplest option for basic maintenance pages)
+http:
+  middlewares:
+    maintenance-warden:
+      plugin:
+        maintenance-warden:
+          maintenanceContent: "<html><body><h1>Under Maintenance</h1><p>Our service is currently undergoing scheduled maintenance. We'll be back shortly.</p></body></html>"
+          contentType: "text/html; charset=utf-8"
+          bypassHeader: "X-Maintenance-Bypass"
+          bypassHeaderValue: "true"
+          enabled: true
+          statusCode: 503
+          bypassPaths:
+            - "/health"
+            - "/api/status"
+          logLevel: 1
+
+# Example 2: Using a static HTML file (recommended for simple maintenance pages)
 http:
   middlewares:
     maintenance-warden:
@@ -96,7 +113,7 @@ http:
             - "/api/status"
           logLevel: 1
 
-# Example 2: Using a maintenance service (to reroute requests to a maintenance service for dynamic content)
+# Example 3: Using a maintenance service (to reroute requests to a maintenance service for dynamic content)
 http:
   middlewares:
     maintenance-warden:
@@ -113,22 +130,6 @@ http:
           maintenanceTimeout: 10
           logLevel: 1
 
-# Example 3: Using inline content (simplest option for basic maintenance pages)
-http:
-  middlewares:
-    maintenance-warden:
-      plugin:
-        maintenance-warden:
-          maintenanceContent: "<html><body><h1>Under Maintenance</h1><p>Our service is currently undergoing scheduled maintenance. We'll be back shortly.</p></body></html>"
-          contentType: "text/html; charset=utf-8"
-          bypassHeader: "X-Maintenance-Bypass"
-          bypassHeaderValue: "true"
-          enabled: true
-          statusCode: 503
-          bypassPaths:
-            - "/health"
-            - "/api/status"
-          logLevel: 1
 ```
 
 ## Configuration Options

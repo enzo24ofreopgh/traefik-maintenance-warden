@@ -50,7 +50,7 @@ jobs:
         else
           COLOR="red"
         fi
-        echo "{\"schemaVersion\":1,\"label\":\"coverage\",\"message\":\"${COVERAGE}%\",\"color\":\"${COLOR}\"}" > coverage.json
+        echo "{\"schemaVersion\":1,\"label\":\"Coverage\",\"message\":\"${COVERAGE}%\",\"color\":\"${COLOR}\"}" > coverage.json
         cat coverage.json
 
     - name: Update Gist with coverage data
